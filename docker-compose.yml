@@ -5,12 +5,11 @@ services:
     build: ./backend
     container_name: django_backend
     ports:
-      - "8000:8000"
+      - "4095:8000"  # Map port 4095 (external) to 8000 (internal Django)
     env_file:
       - .env
     depends_on:
       - postgres
-
   frontend:
     build: ./frontend
     container_name: react_frontend
@@ -31,6 +30,7 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
-
-volumes:
-  pg_data:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 5s
+      retries: 5
