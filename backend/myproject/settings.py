@@ -34,7 +34,7 @@ DATABASES = {
 SECRET_KEY = "django-insecure-)ffn3k&dv##mr#rixcd$3^z4qa8d7rvtrlh51w2fosap)_*c+n"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "mysite-production-4571.up.railway.app",
