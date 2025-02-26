@@ -12,9 +12,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", "sqlite:///db.sqlite3"),
+        conn_max_age=600,
+    )
+}
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +37,11 @@ SECRET_KEY = "django-insecure-)ffn3k&dv##mr#rixcd$3^z4qa8d7rvtrlh51w2fosap)_*c+n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "mysite-production-4571.up.railway.app",
+    "localhost",
+]
+
 
 
 # Application definition
@@ -56,10 +71,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = "myproject.urls"
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React frontend local
-    "https://yourdomain.com",  # Change to your production domain
+    "http://localhost:3000",
+    "https://mysite-production-4571.up.railway.app",
 ]
-
 
 
 REST_FRAMEWORK = {
