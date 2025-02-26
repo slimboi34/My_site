@@ -19,13 +19,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-import os
-from pathlib import Path
-from datetime import timedelta
-
-# Build paths inside the project
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Load environment variables
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "default_secret_key")
 DEBUG = os.getenv("DEBUG", "False") == "True"
@@ -45,6 +38,7 @@ DATABASES = {
 INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
+    "authentication", 
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
