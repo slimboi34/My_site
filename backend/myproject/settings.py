@@ -20,27 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 import os
-import dj_database_url
+from pathlib import Path
+from datetime import timedelta
 
+# Build paths inside the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "default_secret_key")
+DEBUG = os.getenv("DEBUG", "False") == "True"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+
+# Use SQLite as the database
 DATABASES = {
-    "default": dj_database_url.config(default="sqlite:///db.sqlite3")
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)ffn3k&dv##mr#rixcd$3^z4qa8d7rvtrlh51w2fosap)_*c+n"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = [
-    "mysite-production-4571.up.railway.app",
-    "localhost",
-]
-
 
 
 # Application definition
