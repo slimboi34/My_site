@@ -5,11 +5,14 @@ services:
     build: ./backend
     container_name: django_backend
     ports:
-      - "4095:8000"  # Map port 4095 (external) to 8000 (internal Django)
-    env_file:
-      - .env
+      - "4095:8000"  # Map external 4095 to Django 8000
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DEBUG: ${DEBUG}
+      DATABASE_URL: ${DATABASE_URL}
     depends_on:
       - postgres
+
   frontend:
     build: ./frontend
     container_name: react_frontend
@@ -34,3 +37,6 @@ services:
       test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
       interval: 5s
       retries: 5
+
+volumes:
+  pg_data:
